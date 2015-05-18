@@ -1,0 +1,73 @@
+#- name: set password
+#- name: provide ssh key
+#
+# raspi-config --expand-rootfs
+#
+- name: copy /etc/modules
+  copy:
+    src: files/modules
+    dest: /etc/modules
+    mode: 644
+
+- name: copy expand_rootfs.sh
+  copy:
+    src: files/expand_rootfs.sh
+    dest: /tmp/expand_rootfs.sh
+    mode: 700
+
+- name: expand root filesystem
+  shell: /tmp/expand_rootfs.sh
+  ignore_errors: true
+
+# this fails with
+# stderr: Re-reading the partition table failed.: Device or resource busy
+# # shell: reboot
+
+- name: reboot
+  command: /sbin/shutdown -r now
+  async: 0
+  poll: 0
+  ignore_errors: true
+
+- name: waiting for server to come back
+  local_action:
+    wait_for
+      host={{ inventory_hostname }}
+      port=22
+      state=started
+      delay=10
+      timeout=120
+      connect_timeout=1
+  sudo: false
+
+- name: erase packages for minimal install
+  apt: name={{ item }} state=absent purge=yes
+  with_items:
+  - desktop-base
+  - lightdm
+  - lx*
+  - gnome*
+  - x11*
+  - xserver*
+  - raspberrypi-artwork
+  - wolfram-engine
+  when: minimal
+
+- name: erase no longer required packages
+  shell: apt-get -y autoremove
+  when: autoremove
+
+- name: update fw via rpi-update
+  shell: rpi-update
+
+- name: install packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+  - vim
+  - avahi-daemon
+
+- name: dist upgrade
+  apt: upgrade=dist
+
+- name: set hostname
+  hostname: name={{ hostname }}

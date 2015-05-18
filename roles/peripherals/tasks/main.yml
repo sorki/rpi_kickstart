@@ -1,0 +1,7 @@
+- name: set /boot/cmdline.txt
+  template: src=boot-cmdline.txt.j2
+    dest=/boot/cmdline.txt
+
+- name: set /boot/config.txt
+  template: src=boot-config.txt.j2
+    dest=/boot/config.txt

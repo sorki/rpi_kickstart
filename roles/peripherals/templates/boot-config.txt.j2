@@ -1,0 +1,14 @@
+{% if i2c_enable %}
+dtparam=i2c1=on
+dtparam=i2c_arm=on
+{% endif %}
+
+{% if camera_enable %}
+start_x=1
+{% endif %}
+
+{% if disable_camera_led %}
+disable_camera_led=1
+{% endif %}
+
+gpu_mem={{ gpu_mem }}

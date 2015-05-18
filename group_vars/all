@@ -1,0 +1,26 @@
+---
+# Variables listed here are applicable to all host groups
+
+domain: rpi.local
+hostname: rpi.local
+
+minimal: true
+autoremove: true
+
+rootmail: root@localhost.localdomain
+smtp_server: localhost
+smtp_port: 25
+smtp_username:
+smtp_password:
+
+# production environ
+prod: false
+
+i2c_enable: true
+serial_tty_enable: true
+camera_enable: true
+disable_camera_led: true
+gpu_mem: 128 # minimum GPU memory for camera use
+
+# packages
+# screen

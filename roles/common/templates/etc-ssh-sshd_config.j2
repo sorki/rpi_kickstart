@@ -1,0 +1,25 @@
+#{{ ansible_managed }}
+Protocol 2
+SyslogFacility AUTHPRIV
+
+LoginGraceTime 2m
+{% if prod %}
+PermitRootLogin without-password
+{% else %}
+PermitRootLogin yes
+{% endif %}
+MaxAuthTries 6
+
+IgnoreRhosts yes
+PermitEmptyPasswords no
+PasswordAuthentication yes
+ChallengeResponseAuthentication no
+GSSAPIAuthentication no
+
+UsePAM yes
+
+X11Forwarding no
+PrintMotd no
+
+AcceptEnv XMODIFIERS
+Subsystem sftp /usr/lib/openssh/sftp-server

@@ -1,0 +1,5 @@
+- name: kickstart new rpi
+  hosts: all
+  roles:
+    - kickstart
+  sudo: yes

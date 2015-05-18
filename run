@@ -1,0 +1,1 @@
+ANSIBLE_CONFIG=config ansible-playbook -v site.yml $1

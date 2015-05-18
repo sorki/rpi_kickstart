@@ -1,0 +1,8 @@
+curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
+http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
+
+vlc
+
+
+apt-get install v4l-utils
+modprobe bcm2835-v4l2

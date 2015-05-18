@@ -1,0 +1,17 @@
+networking
+
+pip install RPi.GPIO
+
+- set editor to vim
+- rootpw
+- local user
+- delete pi user
+- if headless set ram split
+- firewall
+- watchdog
+
+- fix locale
+
+http://www.uco.es/investiga/grupos/ava/node/40
+
+ git gcc build-essential cmake

@@ -1,0 +1,2 @@
+#ANSIBLE_CONFIG=config ansible-playbook -v --sudo --ask-pass kickstart.yml $1
+ANSIBLE_CONFIG=kickstart_config ansible-playbook -v kickstart.yml $1

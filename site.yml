@@ -1,0 +1,7 @@
+- name: aplly common configuration to all nodes
+  hosts: all
+  roles:
+    - common
+    - peripherals
+    - python_dev
+  sudo: yes

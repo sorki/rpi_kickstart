@@ -1,0 +1,5 @@
+{% if 'db' in group_names %}
+{% for host in groups['web'] + groups['storage'] %}
+-A INPUT -p tcp -s {{ hostvars[host].ansible_default_ipv4.address }} --dport 5432 -j ACCEPT
+{% endfor %}
+{% endif %}

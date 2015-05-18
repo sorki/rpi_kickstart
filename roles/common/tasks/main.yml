@@ -1,0 +1,51 @@
+- name: set correct hostname
+  hostname: name={{ hostname }}
+
+- name: sshd configuration file update
+  template: src=etc-ssh-sshd_config.j2
+    dest=/etc/ssh/sshd_config
+    backup=yes
+    owner=0 group=0 mode=0644
+    validate='/usr/sbin/sshd -T -f %s'
+  notify:
+  - restart sshd
+
+- name: install ntp/ntpade packages
+  apt: name={{ item }} state=present
+  with_items:
+  - ntp
+  - ntpdate
+
+- name: make sure we have the right time
+  shell: ntpdate -u 0.europe.pool.ntp.org
+  ignore_errors: yes
+
+- name: start the ntp service
+  service: name=ntp state=started enabled=yes
+
+- name: set authorized keys
+  authorized_key: user=root key="{{ lookup('file', 'files/dev_key.pub') }}"
+  when: not prod
+
+- name: copy /etc/modprobe.d/8192cu.conf
+  copy:
+    src: files/etc-modprobe.d-8192cu.conf
+    dest: /etc/modprobe.d/8192cu.conf
+    mode: 644
+
+#- name: set root alias
+#  lineinfile: "dest=/etc/aliases line='root: {{ rootmail }}' regexp='^root:' state=present"
+#  notify:
+#  - update mail aliases
+#
+#- name: configure iptables
+#  template: src=etc-sysconfig-iptables.j2
+#    dest=/etc/sysconfig/iptables
+#  notify:
+#  - restart iptables
+#
+#- name: configure ip6tables
+#  template: src=etc-sysconfig-ip6tables.j2
+#    dest=/etc/sysconfig/ip6tables
+#  notify:
+#  - restart ip6tables
