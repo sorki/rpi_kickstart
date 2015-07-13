@@ -4,6 +4,8 @@
 domain: rpi.local
 hostname: rpi.local
 
+timezone_zone: Europe/Amsterdam
+
 minimal: true
 autoremove: true
 
@@ -15,12 +17,3 @@ smtp_password:
 
 # production environ
 prod: false
-
-i2c_enable: true
-serial_tty_enable: true
-camera_enable: true
-disable_camera_led: true
-gpu_mem: 128 # minimum GPU memory for camera use
-
-# packages
-# screen
