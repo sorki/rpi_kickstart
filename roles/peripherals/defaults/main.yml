@@ -1,0 +1,13 @@
+---
+
+i2c_enable: true
+uart_baud: 115200
+uart_tty_enable: true # enable console on serial tty
+
+camera_enable: true
+disable_camera_led: true
+
+gpu_mem: 128 # minimum GPU memory for camera use
+
+pps_input_enable: false # enable pulse per second input
+pps_gpio_pin: 18 # pps input pin
