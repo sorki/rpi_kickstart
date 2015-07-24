@@ -1,5 +1,5 @@
 dwc_otg.lpm_enable=0
-{%- if serial_tty_enable %}
- console=ttyAMA0,115200 kgdboc=ttyAMA0,115200
+{%- if uart_tty_enable %}
+ console=ttyAMA0,{{ uart_baud }} kgdboc=ttyAMA0,{{ uart_baud }}
 {%- endif %}
  console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait

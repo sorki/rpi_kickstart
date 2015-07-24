@@ -11,3 +11,42 @@ gpu_mem: 128 # minimum GPU memory for camera use
 
 pps_input_enable: false # enable pulse per second input
 pps_gpio_pin: 18 # pps input pin
+
+# mmc, heartbeat
+led_trigger: mmc
+
+#MORE:
+
+# https://github.com/raspberrypi/firmware/tree/master/boot/overlays
+
+#dtoverlay=i2c-rtc,<model>
+#where <model> is one of: ds1307, ds3231, pcf2127, pcf8523, pcf8563
+#
+#    dtoverlay=hifiberry-dac
+#    dtoverlay=hifiberry-dacplus
+#    dtoverlay=hifiberry-digi
+#    dtoverlay=hifiberry-amp
+#    dtoverlay=iqaudio-dac
+#    dtoverlay=iqaudio-dacplus
+
+# My SPI interface has disappeared. What do I do?
+# Add "dtparam=spi=on" to your config.txt and reboot. Or use raspi-config, as described above.
+# My I2S interface has disappeared. What do I do?
+# In case you haven't spotted the pattern, add "dtparam=i2s=on" to your config.txt.
+# And reboot. This one isn't in raspi-config.
+# My lirc-rpi module doesn't load anymore. What do I do?
+# "dtoverlay=lirc-rpi".
+# But what about the lirc-rpi module parameters?
+# Add them to the end of the dtoverlay line, like this: "dtoverlay=lirc-rpi,gpio_in_pin=16,gpio_in_pull=high".
+
+
+
+
+# 1 wire
+# Errm, "w1-gpio"?
+# Slightly more complicated. If you require the external pullup enable pin, use:
+# "dtoverlay=w1-gpio-pullup,gpiopin=<x>,extpullup=<y>"
+# otherwise use:
+# "dtoverlay=w1-gpio,gpiopin=<x>"
+# (where <x> and <y> are GPIO pins, obviously).
+# If you are using the parasitic power (power over data, 2-wire) mode, add ",pullup=1" (or ",pullup=on")

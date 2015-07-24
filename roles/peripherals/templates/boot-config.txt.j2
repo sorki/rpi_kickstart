@@ -1,3 +1,5 @@
+#{{ ansible_managed }}
+
 {% if i2c_enable %}
 dtparam=i2c1=on
 dtparam=i2c_arm=on
@@ -12,3 +14,15 @@ disable_camera_led=1
 {% endif %}
 
 gpu_mem={{ gpu_mem }}
+
+{% if uart_baud %}
+init_uart_baud={{ uart_baud }}
+{% endif %}
+
+{% if pps_input_enable %}
+dtoverlay=pps-gpio,gpiopin={{ pps_gpio_pin }}
+{% endif %}
+
+{% if led_trigger %}
+dtparam=act_led_trigger={{ led_trigger }}
+{% endif %}
