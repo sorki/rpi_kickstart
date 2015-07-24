@@ -1,0 +1,12 @@
+---
+# Variables listed here are applicable to gps host group
+
+i2c_enable: true
+uart_tty_enable: false
+uart_baud: 9600
+
+camera_enable: false
+gpu_mem: 128 # TODO (sorki): make this smaller
+
+pps_input_enable: true
+pps_gpio_pin: 18
