@@ -1,4 +1,9 @@
 - name: kickstart new rpi
+  vars_prompt:
+    - name: new_hostname
+      prompt: "New hostname to set"
+      private: no
+
   hosts: all
   roles:
     - kickstart

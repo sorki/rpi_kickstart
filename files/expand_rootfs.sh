@@ -11,5 +11,3 @@ p
 p
 w
 EOF
-
-resize2fs /dev/mmclbk0p2
