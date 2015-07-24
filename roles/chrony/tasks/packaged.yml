@@ -1,0 +1,15 @@
+---
+- name: install packages
+  apt: name={{ item }} state=present
+  with_items:
+    - chrony
+  tags: packages
+
+- name: provide config
+  template: src=chrony.conf.j2
+    dest=/etc/chrony/chrony.conf
+  tags: config
+
+- name: enable chrony
+  service: name=chrony state=started enabled=yes
+  tags: service

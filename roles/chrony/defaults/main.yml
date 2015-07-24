@@ -1,0 +1,21 @@
+---
+
+chrony_from_git: false # build from git when set, use package when version otherwise
+chrony_git_repo: git://git.tuxfamily.org/gitroot/chrony/chrony.git
+chrony_git_repo_accept_hostkey: true
+chrony_git_replace_packaged: true # replace packaged version
+chrony_git_target: /root/chrony
+
+chrony_keys: '0 not-so-random'
+# FIXME (sorki): ^^ not a good default
+
+chrony_log: true
+chrony_log_what: tracking measurements statistics
+chrony_log_where: /var/log/chrony
+
+chrony_refclock_pps: true
+chrony_refclock_pps_source: /dev/pps0
+chrony_refclock_gps: true
+chrony_refclock_gps_source: 'SHM 0'
+chrony_custom_refclocks:
+  - '#refclock SOCK /var/run/chrony.ttyAMA0.sock refid SOCK'

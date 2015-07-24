@@ -1,0 +1,72 @@
+---
+- name: install build requirements
+  apt: name={{ item }} state=present
+  with_items:
+    - gcc
+    - texinfo
+  tags: packages
+
+- name: clone git
+  git: repo={{ chrony_git_repo }}
+    dest={{ chrony_git_target }}
+    accept_hostkey={{ chrony_git_repo_accept_hostkey }}
+  tags: build
+
+- set_fact:
+    chrony_prefix: "/usr"
+  when: chrony_git_replace_packaged
+  tags:
+    - config
+    - build
+
+- set_fact:
+    chrony_prefix: "/usr/local"
+  when: not chrony_git_replace_packaged
+  tags:
+    - config
+    - build
+
+- name: erase system chrony
+  apt: name=chrony state=absent
+  when: chrony_git_replace_packaged
+  tags: packages
+
+- stat: path="{{ chrony_git_target}}/chronyd"
+  register: chronyd_stat
+
+- name: build
+  shell: 'cd {{ chrony_git_target }};{{ item }}'
+  with_items:
+    - ./configure --prefix={{ chrony_prefix }}
+    - make
+    - make install
+  tags: build
+  when: not {{ chronyd_stat.stat.exists }}
+
+- name: provide config
+  template: src=chrony.conf.j2
+    dest=/etc/chrony.conf
+  tags: config
+
+- name: provide key
+  template: src=etc-chrony.keys.j2
+    dest=/etc/chrony.keys
+  tags: config
+
+- name: provide unit file
+  template: src=etc-systemd-system-chronyd_git.service.j2
+    dest=/etc/systemd/system/chronyd_git.service
+  tags: service
+
+- name: reload systemd
+  shell: systemctl daemon-reload
+  tags: service
+
+- name: disable packaged chrony
+  service: name=chrony state=stopped enabled=no
+  when: chrony_git_replace_packaged
+  tags: service
+
+- name: enable chronyd_git
+  service: name=chronyd_git state=started enabled=yes
+  tags: service

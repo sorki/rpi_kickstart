@@ -1,0 +1,4 @@
+---
+- name: make sure we have the right time
+  shell: chronyc -a makestep
+  ignore_errors: yes

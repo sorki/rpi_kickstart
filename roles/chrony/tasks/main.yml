@@ -1,0 +1,8 @@
+---
+- include: from_git.yml
+  when: chrony_from_git
+
+- include: packaged.yml
+  when: not chrony_from_git
+
+- include: makestep.yml
