@@ -25,6 +25,13 @@
     dest: /etc/modprobe.d/8192cu.conf
     mode: 644
 
+- name: put 01_nodoc to /etc/dpkg/dpkg.cfg.d/01_nodoc
+  copy:
+    src: files/01_nodoc
+    dest: /etc/dpkg/dpkg.cfg.d/01_nodoc
+    mode: 644
+  when: nodoc
+
 #- name: set root alias
 #  lineinfile: "dest=/etc/aliases line='root: {{ rootmail }}' regexp='^root:' state=present"
 #  notify:

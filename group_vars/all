@@ -8,6 +8,7 @@ timezone_zone: Europe/Amsterdam
 
 minimal: true
 autoremove: true
+nodoc: true # don't install man pages and documentation
 
 rootmail: root@localhost.localdomain
 smtp_server: localhost
