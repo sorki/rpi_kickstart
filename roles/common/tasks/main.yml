@@ -10,18 +10,10 @@
   notify:
   - restart sshd
 
-- name: install ntp/ntpade packages
+- name: install packages
   apt: name={{ item }} state=present
   with_items:
-  - ntp
-  - ntpdate
-
-- name: make sure we have the right time
-  shell: ntpdate -u 0.europe.pool.ntp.org
-  ignore_errors: yes
-
-- name: start the ntp service
-  service: name=ntp state=started enabled=yes
+    - "{{ packages }}"
 
 - name: set authorized keys
   authorized_key: user=root key="{{ lookup('file', 'files/dev_key.pub') }}"

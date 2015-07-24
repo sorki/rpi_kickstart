@@ -17,3 +17,11 @@ smtp_password:
 
 # production environ
 prod: false
+
+packages:
+- bc
+- bash-completion
+- powertop
+- psmisc
+- screen
+- strace
