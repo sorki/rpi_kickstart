@@ -3,3 +3,6 @@ dwc_otg.lpm_enable=0
  console=ttyAMA0,{{ uart_baud }} kgdboc=ttyAMA0,{{ uart_baud }}
 {%- endif %}
  console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait
+{%- if kernel_cmdline_append %}
+ {{ kernel_cmdline_append }}
+{%- endif %}

@@ -10,3 +10,5 @@ gpu_mem: 128 # TODO (sorki): make this smaller
 
 pps_input_enable: true
 pps_gpio_pin: 18
+
+kernel_cmdline_append: nohz=off
