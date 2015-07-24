@@ -1,5 +1,12 @@
 [common]
-#raspberrypi.lan ansible_connection=ssh ansible_ssh_user=pi ansible_ssh_pass=raspberry ansible_sudo_pass=raspberry
-#raspberry.lan ansible_connection=ssh ansible_ssh_user=pi ansible_ssh_pass=raspberry ansible_sudo_pass=raspberry
-rpi.lan ansible_connection=ssh ansible_ssh_user=pi ansible_ssh_pass=raspberry ansible_sudo_pass=raspberry
-canhazoled.lan ansible_connection=ssh ansible_ssh_user=pi ansible_ssh_pass=raspberry ansible_sudo_pass=raspberry
+newrpi.lan ansible_connection=ssh ansible_ssh_user=pi ansible_ssh_pass=raspberry ansible_sudo_pass=raspberry
+
+[gps]
+
+[ntpserver]
+
+[devel]
+
+[hostapd]
+
+[netconnectd]

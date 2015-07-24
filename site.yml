@@ -2,6 +2,38 @@
   hosts: all
   roles:
     - common
+    - tersmitten.timezone
+    - avahi
     - peripherals
+  sudo: yes
+
+- name: gps
+  hosts: gps
+  roles:
+    - gpsd
+  sudo: yes
+
+- name: ntpserver
+  hosts: ntpserver
+  roles:
+    - { role: chrony, chrony_from_git: true }
+  sudo: yes
+
+- name: devel
+  hosts: devel
+  roles:
     - python_dev
+    - dev
+  sudo: yes
+
+- name: hostapd
+  hosts: hostapd
+  roles:
+    - hostapd
+  sudo: yes
+
+- name: netconnectd
+  hosts: netconnectd
+  roles:
+    - netconnectd
   sudo: yes
