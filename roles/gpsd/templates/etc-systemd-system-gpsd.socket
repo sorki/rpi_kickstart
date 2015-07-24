@@ -1,0 +1,16 @@
+#{{ ansible_managed }}
+[Unit]
+Description=GPS (Global Positioning System) Daemon Sockets
+
+[Socket]
+ListenStream=/var/run/gpsd.sock
+{% if gpsd_listen_all %}
+ListenStream={{ gpsd_port }}
+{% else %}
+ListenStream=[::]:{{ gpsd_port }}
+ListenStream=127.0.0.1:{{ gpsd_port }}
+{% endif %}
+SocketMode=0600
+
+[Install]
+WantedBy=sockets.target

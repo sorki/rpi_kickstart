@@ -1,0 +1,18 @@
+---
+
+gpsd_usbauto: true # enable USB hotplugging
+gpsd_devices: '/dev/ttyAMA0'
+gpsd_options: '-G -n'
+
+gpsd_listen_all: true
+gpsd_port: 2947
+gpsd_socket_activated: false
+
+# Options include:
+  # -b = bluetooth-safe: open data sources read-only
+  # -n = don't wait for client connects to poll GPS
+  # -N = don't go into background
+  # -F sockfile = specify control socket location
+  # -G = make gpsd listen on INADDR_ANY
+  # -D integer (default 0) = set debug level
+  # -S integer (default 2947) = set port for daemon

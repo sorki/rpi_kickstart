@@ -1,0 +1,6 @@
+#{{ ansible_managed }}
+{% if gpsd_usbauto %}
+USBAUTO="true"
+{% endif %}
+DEVICES="{{ gpsd_devices }}"
+GPSD_OPTIONS="{{ gpsd_options }}"

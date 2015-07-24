@@ -1,0 +1,13 @@
+#{{ ansible_managed }}
+[Unit]
+Description=GPS (Global Positioning System) Daemon
+{% if gpsd_socket_activated %}
+Requires=gpsd.socket
+{% endif %}
+
+[Service]
+EnvironmentFile=-/etc/default/gpsd
+ExecStart=/usr/sbin/gpsd -N $GPSD_OPTIONS $DEVICES
+
+[Install]
+Also=gpsd.socket
