@@ -58,6 +58,10 @@ Usage
 
 - ``git clone https://github.com/sorki/rpi_kickstart``
 - ``cd rpi_kickstart``
+- Install dependencies::
+
+        ansible-galaxy install --role-file=requirements --roles-path=remote_roles
+
 - if your RPi is accessible under ``raspberrypi.lan``
   hostname you can now run::
 
