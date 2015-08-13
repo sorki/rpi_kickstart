@@ -23,10 +23,7 @@
 - name: provide gpsd.service
   template: src=etc-systemd-system-gpsd.service
     dest=/etc/systemd/system/gpsd.service
-  tags: service
-
-- name: reload systemd
-  shell: systemctl daemon-reload
+  notify: systemd
   tags: service
 
 - name: enable gpsd
