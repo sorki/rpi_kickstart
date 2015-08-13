@@ -1,0 +1,8 @@
+---
+- include: patched.yml
+  when: hostapd_rtl871x_patched
+
+- include: packaged.yml
+  when: not hostapd_rtl871x_patched
+
+- include: config.yml

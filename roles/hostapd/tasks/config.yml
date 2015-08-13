@@ -1,0 +1,11 @@
+---
+
+- name: provide config
+  template: src=hostapd.conf.j2
+    dest={{ hostapd_config_path }}
+  tags: config
+
+- name: enable hostapd
+  service: name=hostapd state=started enabled=yes
+  when: hostapd_on_boot
+  tags: service

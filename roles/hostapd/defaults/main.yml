@@ -1,0 +1,29 @@
+---
+
+hostapd_on_boot: false
+hostapd_ssid: so1337
+hostapd_passphrase: change_me_now!
+hostapd_wpa: 1 # 0 WPA, 1 WPA2
+hostapd_wpa_key_mgmt: WPA-PSK
+hostapd_wpa_pairwise: TKIP
+hostapd_rsn_pairwise: CCMP
+hostapd_driver: nl80211
+
+hostapd_interface: wlan0
+hostapd_hw_mode: g
+hostapd_channel: 7
+
+hostapd_ctrl_interface: /var/run/hostapd
+hostapd_ctrl_interface_group: wheel
+
+hostapd_install_dir: /usr/sbin
+hostapd_config_path: /etc/hostapd/hostapd.conf
+
+# ----------------------- #
+# rtl871x patched related #
+# ----------------------- #
+
+hostapd_rtl871x_patched: false # build patched version of hostapd, use packaged when false
+hostapd_workdir: "/root/hostapd"
+hostapd_version: "hostapd-2.4"
+hostapd_patches_git_repo: "https://github.com/pritambaral/hostapd-rtl871xdrv.git"

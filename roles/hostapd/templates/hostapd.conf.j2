@@ -1,0 +1,21 @@
+#{{ ansible_managed }}
+
+ssid={{ hostapd_ssid }}
+wpa_passphrase={{ hostapd_passphrase }}
+
+wpa={{ hostapd_wpa }}
+wpa_key_mgmt={{ hostapd_wpa_key_mgmt }}
+wpa_pairwise={{ hostapd_wpa_pairwise }}
+rsn_pairwise={{ hostapd_rsn_pairwise }}
+
+driver={{ hostapd_driver }}
+interface={{ hostapd_interface }}
+hw_mode={{ hostapd_hw_mode }}
+channel={{ hostapd_channel }}
+
+ctrl_interface={{ hostapd_ctrl_interface }}
+ctrl_interface_group={{ hostapd_ctrl_interface_group }}
+
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
