@@ -2,14 +2,18 @@
 - name: install build requirements
   apt: name={{ item }} state=present
   with_items:
+    - bison
     - gcc
     - texinfo
   tags: packages
 
 - name: clone git
-  git: repo={{ chrony_git_repo }}
+  git:
+    repo={{ chrony_git_repo }}
     dest={{ chrony_git_target }}
     accept_hostkey={{ chrony_git_repo_accept_hostkey }}
+    update={{ chrony_git_update }}
+  register: chrony_git_result
   tags: build
 
 - set_fact:
@@ -41,7 +45,7 @@
     - make
     - make install
   tags: build
-  when: not {{ chronyd_stat.stat.exists }}
+  when: not {{ chronyd_stat.stat.exists }} or {{ chrony_git_rebuild }}
 
 - name: provide config
   template: src=chrony.conf.j2

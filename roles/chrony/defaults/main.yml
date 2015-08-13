@@ -5,6 +5,8 @@ chrony_git_repo: git://git.tuxfamily.org/gitroot/chrony/chrony.git
 chrony_git_repo_accept_hostkey: true
 chrony_git_replace_packaged: true # replace packaged version
 chrony_git_target: /root/chrony
+chrony_git_update: true
+chrony_git_rebuild: false # force rebuild
 
 chrony_keys: '0 not-so-random'
 # FIXME (sorki): ^^ not a good default
