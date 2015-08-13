@@ -37,10 +37,25 @@ raspi-config / overclocking / memshare / overscan
 GPS config
 $ echo -e '$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29\r\n' > /dev/ttyAMA0
 
-use notify instaed of
-#
-#- name: reload systemd
-#  shell: systemctl daemon-reload
-#  tags: service
-
 move 3d party roles to different folder
+
+multiple wifi conections saved by ncd
+
+upstreaming
+~~~~~~~~~~~
+
+hostapd-rtl871xdrv.git
+
+
+packaging
+~~~~~~~~~
+
+netconnectd
+
+tooling
+~~~~~~~
+
+grep vars from yml/j2 file, generate template
+for defaults/main.yml
+
+check if vars are defined
