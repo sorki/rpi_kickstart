@@ -14,11 +14,8 @@
   shell: /tmp/expand_rootfs.sh
   ignore_errors: true
 
-# this fails with
+# FIXME (sorki): this fails with
 # stderr: Re-reading the partition table failed.: Device or resource busy
-
-- name: resize2fs
-  shell: resize2fs /dev/mmclbk0p2
 
 - name: erase packages for minimal install
   apt: name={{ item }} state=absent purge=yes
@@ -38,7 +35,8 @@
   when: autoremove
 
 - name: update fw via rpi-update
-  shell: rpi-update
+  shell: "UPDATE_SELF=0 SKIP_WARNING=1 rpi-update"
+  when: rpi_update
 
 - name: install packages
   apt: name={{ item }} state=present update_cache=yes
@@ -48,12 +46,28 @@
 
 - name: dist upgrade
   apt: upgrade=dist
+  when: dist_upgrade
 
 - name: set hostname
   hostname: name={{ new_hostname }}
 
 - name: reboot
-  command: /sbin/shutdown -r now
-  async: 0
+  #command: /sbin/shutdown -r now
+  shell: sleep 2 && shutdown -r now "Ansible reboot triggered"
+  async: 1
   poll: 0
   ignore_errors: true
+
+- name: waiting for server to come back
+  local_action:
+    wait_for
+      host={{ new_hostname }}
+      port=22
+      state=started
+      delay=15
+      timeout=300
+      connect_timeout=15
+  sudo: false
+
+- name: resize2fs
+  shell: resize2fs /dev/mmcblk0p2
