@@ -1,0 +1,64 @@
+- name: install packages
+  apt: name={{ item }} state=present
+  with_items:
+    - dnsmasq
+    - logrotate
+    - rfkill
+  tags: packages
+
+# FIXME: (sorki) also on foosel/wifi (wifi==1.0.1), PyYaml, netaddr
+
+- name: clone git
+  git:
+    repo={{ netconnectd_git_repo }}
+    dest={{ netconnectd_git_target }}
+    update={{ netconnectd_git_update }}
+  tags: build
+
+- name: build
+  shell: 'cd {{ netconnectd_git_target }};{{ item }}'
+  with_items:
+    - python setup.py install
+  when: not {{ chronyd_stat.stat.exists }} or {{ chrony_git_rebuild }}
+  tags: build
+
+- name: provide netconnectd config
+  template:
+    src=netconnectd.yaml.j2
+    dest={{ netconnectd_config_path }}
+  tags: config
+
+- name: provide netconnectd.service
+  template:
+    src=netconnectd.service.j2
+    dest=/etc/systemd/system/netconnectd.service
+  notify: systemd
+  tags: service
+
+- name: provide netconnectd.logrotate
+  copy:
+    src=netconnectd.logrotate
+    dest=/etc/logrotate.d/netconnectd.logrotate
+  tags: config
+
+- name: create netconnectd.conf.d dirs
+  file:
+    path={{ item }}
+    state=directory
+  with_items:
+    - /etc/netconnectd.conf.d/
+    - /etc/netconnectd.conf.d/hostapd
+    - /etc/netconnectd.conf.d/dnsmasq
+
+- name: ensure timeout is set for dhclient
+  lineinfile:
+    dest=/etc/dhcp/dhclient.conf
+    line='timeout 60;'
+    regexp='^timeout'
+    state=present
+  tags: config
+
+- name: enable netconnectd
+  service: name=netconnectd state=started enabled=yes
+  when: netconnectd_on_boot
+  tags: service

@@ -1,0 +1,14 @@
+#{{ ansible_managed }}
+[Unit]
+Description=A daemon for staying connected
+After=network.target
+
+[Service]
+PIDFile=/run/netconnectd.pid
+ExecStart={{ netconnectd_install_dir}}/netconnectd --config {{ netconnectd_config_path }} \
+  --address {{ netconnectd_socket }} \
+  --logfile {{ netconnectd_logfile }} \
+  --foreground
+
+[Install]
+WantedBy=multi-user.target

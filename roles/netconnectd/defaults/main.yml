@@ -1,0 +1,32 @@
+---
+
+netconnectd_wifi_iface: wlan0
+netconnectd_wired_iface: eth0
+#netconnectd_link_monitor_enable: true
+netconnectd_ap_ssid: so1337
+netconnectd_psk: change_me_now!
+netconnectd_channel: 7
+netconnectd_ip: 10.0.0.1
+netconnectd_netmask: 24
+netconnectd_dhcp_range_from: 10.0.0.2
+netconnectd_dhcp_range_to: 10.0.0.200
+netconnectd_domain: lan
+netconnectd_fwd_to_wired: false
+
+netconnectd_free: false # if your system doesn't run NetworkManager, set this to false
+netconnectd_kill: true
+
+netconnectd_driver: nl80211
+
+netconnectd_install_dir: /usr/local/bin
+netconnectd_hostapd_dir: /usr/sbin
+netconnectd_dnsmasq_dir: /usr/sbin
+netconnectd_config_path: /etc/netconnectd.yaml
+netconnectd_socket: /var/run/netconnectd.sock
+netconnectd_logfile: /var/log/netconnectd.log
+
+netconnectd_on_boot: false
+
+netconnectd_git_repo: 'https://github.com/foosel/netconnectd'
+netconnectd_git_target: '/root/netconnectd'
+netconnectd_git_update: true # update git repository from internets

@@ -1,0 +1,93 @@
+# {{ ansible_managed }}
+# control socket to listen on
+socket: {{ netconnectd_socket }}
+
+# wifi and wired interface
+interfaces:
+  wifi: {{ netconnectd_wifi_iface }}
+  wired: {{ netconnectd_wired_iface }}
+
+# link monitor configuration
+#link_monitor:
+#  # whether to enable the link monitor
+#  enabled: True
+#
+#  # after how many consecutive link down events to start up the AP
+#  max_link_down: 3
+#
+#  # interval between link checks
+#  interval: 10
+
+
+# access point configuration
+ap:
+  # nick name under which to save the AP configuration, usually won't need to be changed
+  #name: netconnectd_ap
+
+  # driver to use for hostapd, you might have to change this depending
+  # on your wifi card/dongle
+  driver: {{ netconnectd_driver }}
+
+  # your AP wifi's SSID
+  ssid: {{ netconnectd_ap_ssid }}
+
+  # your AP wifi's passphrase
+  psk: {{ netconnectd_psk }}
+
+  # wifi channel on which the AP should run
+  channel: {{ netconnectd_channel }}
+
+  # ip of the AP on the created wifi, also check if you need to adjust 
+  # network and range if you change this
+  ip: {{ netconnectd_ip }}
+
+  # network of the created wifi, also check if you need to adjust ip 
+  # and range if you change this
+  network: {{ netconnectd_ip }}/{{ netconnectd_netmask }}
+
+  # range of ip addresses to hand out via dhcpd, first ip and last ip,
+  # also check if you need to adjust ip and network if you change this
+  range:
+  - {{ netconnectd_dhcp_range_from }}
+  - {{ netconnectd_dhcp_range_to }}
+
+  # if you also want to reach your hosts by something like myhost.home,
+  # set this, normally unset
+  domain: {{ netconnectd_domain }}
+
+  # whether to create a true AP forwarding to the wired interface, defaults
+  # to false
+  forwarding_to_wired: {{ netconnectd_fwd_to_wired }}
+
+# wifi configuration
+wifi:
+  # nick name under which the wifi connection will be saved, usually 
+  # no need to change this
+  #name: netconnectd_wifi
+
+  # if your system doesn't run NetworkManager, set this to false
+  free: {{ netconnectd_free }}
+
+  # set this to true if you want to reset the wifi interface via rfkill
+  # upon interface set up errors during wifi connection, scanning or
+  # bringing up the AP, which may happen if the wifi driver hiccups
+  #
+  # Recommended, but depends on the rfkill command to be available
+  kill: {{ netconnectd_kill }}
+
+# various paths of tools used
+paths:
+  # path to hostapd executable
+  hostapd: {{ netconnectd_hostapd_dir }}/hostapd
+
+  # folder where to store managed hostapd configuration files
+  hostapd_conf: /etc/netconnectd.conf.d/hostapd
+
+  # path to dnsmasq executable
+  dnsmasq: {{ netconnectd_dnsmasq_dir}}/dnsmasq
+
+  # folder where to store managed dnsmasq configuration files
+  dnsmasq_conf: /etc/netconnectd.conf.d/dnsmasq
+
+  # path to interfaces file to use, usually no need to change this
+  #interfaces: /etc/network/interfaces
