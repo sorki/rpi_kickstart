@@ -2,6 +2,7 @@
   hosts: all
   roles:
     - common
+    - systemd
     - tersmitten.timezone
     - avahi
     - peripherals
