@@ -1,8 +1,18 @@
 #{{ ansible_managed }}
 
 {% if i2c_enable %}
-dtparam=i2c1=on
-dtparam=i2c_arm=on
+# enable i2c
+dtparam=i2c=on
+{% endif %}
+
+# enable VideoCore i2c
+#dtparam=i2c_vc=on
+# legacy way
+#dtparam=i2c0=on
+#dtparam=i2c1=on
+
+{% if i2c_rtc %}
+dtoverlay=i2c-rtc,{{ i2c_rtc }}
 {% endif %}
 
 {% if camera_enable %}
