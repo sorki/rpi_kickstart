@@ -44,9 +44,3 @@ fcntl.ioctl(fd, termios.TIOCSWINSZ,
             struct.pack("HHHH", rows, cols, 0, 0))
 
 print "\nReset the terminal to", rows, "rows", cols, "cols"
-
-
-
-
-
-
