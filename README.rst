@@ -70,13 +70,24 @@ Usage
 - if not you have to alter ``kickstart_hosts`` file
   to match your RPi's hostname and re-run the command
 
+
+Configuring your RaspberryPi
+----------------------------
+
+After kickstart finishes you can proceed with
+configuration of various peripherals and roles.
+
+Common roles expects public ssh key in ``files/dev_key.pub``
+- you can either use your existing key from ``~/.ssh`` directory
+or create a new one with ``ssh-keygen``.
+
 - after kickstart finishes add your RPi's hostname to
   ``hosts`` and ``site.yml`` files and provision using::
 
         ./run
 
 - you can now configure your RPi by creating a
-  ``host_vars/<HOSTNAME>`` file, for example if your
+  ``host_vars/<HOSTNAME>`` file. For example if your
   RPi is using `myrpi.lan` hostname and you want to
   disable tty on UART::
 
