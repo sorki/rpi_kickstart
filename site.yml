@@ -1,40 +1,8 @@
-- name: aplly common configuration to all nodes
-  hosts: all
-  roles:
-    - common
-    - systemd
-    - tersmitten.timezone
-    - avahi
-    - peripherals
-  sudo: yes
+---
 
-- name: gps
-  hosts: gps
-  roles:
-    - gpsd
-  sudo: yes
-
-- name: ntpserver
-  hosts: ntpserver
-  roles:
-    - { role: chrony, chrony_from_git: true }
-  sudo: yes
-
-- name: devel
-  hosts: devel
-  roles:
-    - python_dev
-    - dev
-  sudo: yes
-
-- name: hostapd
-  hosts: hostapd
-  roles:
-    - hostapd
-  sudo: yes
-
-- name: netconnectd
-  hosts: netconnectd
-  roles:
-    - netconnectd
-  sudo: yes
+- include: plays/common.yml
+- include: plays/devel.yml
+- include: plays/gps.yml
+- include: plays/hostapd.yml
+- include: plays/netconnectd.yml
+- include: plays/ntpserver.yml

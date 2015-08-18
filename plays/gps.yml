@@ -1,0 +1,5 @@
+- name: gps
+  hosts: gps
+  roles:
+    - gpsd
+  sudo: yes

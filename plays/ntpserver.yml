@@ -1,0 +1,5 @@
+- name: ntpserver
+  hosts: ntpserver
+  roles:
+    - { role: chrony, chrony_from_git: true }
+  sudo: yes

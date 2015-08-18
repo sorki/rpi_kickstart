@@ -1,0 +1,5 @@
+- name: hostapd
+  hosts: hostapd
+  roles:
+    - hostapd
+  sudo: yes

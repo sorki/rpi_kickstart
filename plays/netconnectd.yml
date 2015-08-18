@@ -1,0 +1,5 @@
+- name: netconnectd
+  hosts: netconnectd
+  roles:
+    - netconnectd
+  sudo: yes

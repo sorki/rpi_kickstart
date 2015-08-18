@@ -1,0 +1,9 @@
+- name: apply common configuration to all nodes
+  hosts: all
+  roles:
+    - common
+    - systemd
+    - tersmitten.timezone
+    - avahi
+    - peripherals
+  sudo: yes

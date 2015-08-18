@@ -1,0 +1,6 @@
+- name: devel
+  hosts: devel
+  roles:
+    - python_dev
+    - dev
+  sudo: yes
