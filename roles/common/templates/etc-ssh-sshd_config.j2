@@ -3,7 +3,7 @@ Protocol 2
 SyslogFacility AUTHPRIV
 
 LoginGraceTime 2m
-{% if prod %}
+{% if common_production_env %}
 PermitRootLogin without-password
 {% else %}
 PermitRootLogin yes

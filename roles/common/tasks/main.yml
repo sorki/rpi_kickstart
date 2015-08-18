@@ -15,22 +15,27 @@
   with_items:
     - "{{ packages }}"
 
-- name: set authorized keys
+- name: set authorized keys (production environment)
+  authorized_key: user=root key="{{ lookup('file', 'files/prod_key.pub') }}"
+  when: common_production_env
+
+- name: set authorized keys (devel environment)
   authorized_key: user=root key="{{ lookup('file', 'files/dev_key.pub') }}"
-  when: not prod
+  when: not common_production_env
 
 - name: copy /etc/modprobe.d/8192cu.conf
   copy:
     src: files/etc-modprobe.d-8192cu.conf
     dest: /etc/modprobe.d/8192cu.conf
     mode: 644
+  when: common_disable_8192cu_power_management
 
 - name: put 01_nodoc to /etc/dpkg/dpkg.cfg.d/01_nodoc
   copy:
     src: files/01_nodoc
     dest: /etc/dpkg/dpkg.cfg.d/01_nodoc
     mode: 644
-  when: nodoc
+  when: common_nodoc
 
 #- name: set root alias
 #  lineinfile: "dest=/etc/aliases line='root: {{ rootmail }}' regexp='^root:' state=present"

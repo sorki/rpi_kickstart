@@ -1,21 +1,15 @@
 ---
 # Variables listed here are applicable to all host groups
 
-domain: rpi.local
 hostname: rpi.local
 
 timezone_zone: Europe/Amsterdam
-
-nodoc: true # don't install man pages and documentation
 
 rootmail: root@localhost.localdomain
 smtp_server: localhost
 smtp_port: 25
 smtp_username:
 smtp_password:
-
-# production environ
-prod: false
 
 packages:
 - bc

@@ -1,0 +1,10 @@
+---
+
+# set to true when in pruduction environment
+common_production_env: false
+
+# disable 8192cu wifi power management
+common_disable_8192cu_power_management: true
+
+# don't install man pages and documentation
+common_nodoc: true
