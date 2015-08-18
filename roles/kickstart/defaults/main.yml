@@ -1,0 +1,17 @@
+---
+
+# resize root partition to full size
+kickstart_resize_rootfs: true
+
+# erase packages for minimal install (no X11, wolfram)
+# useful for cleaning official rpi images
+kickstart_minimal: false
+
+# erase no longer required packages (apt-get -y autoremove)
+kickstart_autoremove: false
+
+# update firmware via rpi-update
+kickstart_rpi_update: false
+
+# perform dist upgrade
+kickstart_dist_upgrade: false

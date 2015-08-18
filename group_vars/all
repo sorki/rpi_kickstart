@@ -6,11 +6,6 @@ hostname: rpi.local
 
 timezone_zone: Europe/Amsterdam
 
-# should be prefixed with kickstart_
-minimal: false
-autoremove: false
-rpi_update: false
-dist_upgrade: false
 nodoc: true # don't install man pages and documentation
 
 rootmail: root@localhost.localdomain

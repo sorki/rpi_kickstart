@@ -9,10 +9,12 @@
     src: files/expand_rootfs.sh
     dest: /tmp/expand_rootfs.sh
     mode: 700
+  when: kickstart_resize_rootfs
 
 - name: expand root filesystem
   shell: /tmp/expand_rootfs.sh
   ignore_errors: true
+  when: kickstart_resize_rootfs
 
 # FIXME (sorki): this fails with
 # stderr: Re-reading the partition table failed.: Device or resource busy
@@ -28,15 +30,15 @@
   - xserver*
   - raspberrypi-artwork
   - wolfram-engine
-  when: minimal
+  when: kickstart_minimal
 
 - name: erase no longer required packages
   shell: apt-get -y autoremove
-  when: autoremove
+  when: kickstart_autoremove
 
 - name: update fw via rpi-update
   shell: "UPDATE_SELF=0 SKIP_WARNING=1 rpi-update"
-  when: rpi_update
+  when: kickstart_rpi_update
 
 - name: install packages
   apt: name={{ item }} state=present update_cache=yes
@@ -46,7 +48,7 @@
 
 - name: dist upgrade
   apt: upgrade=dist
-  when: dist_upgrade
+  when: kickstart_dist_upgrade
 
 - name: set hostname
   hostname: name={{ new_hostname }}
@@ -71,3 +73,4 @@
 
 - name: resize2fs
   shell: resize2fs /dev/mmcblk0p2
+  when: kickstart_resize_rootfs
