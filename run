@@ -1,1 +1,35 @@
-ANSIBLE_CONFIG=config ansible-playbook -v site.yml $1
+#!/bin/bash
+#
+# Run site.yml or one of the playbooks from plays/ dir
+#
+# Usage:
+#
+# Whole site:
+# ./run
+#
+# Partial plays (any one of the following is supported):
+#
+# ./run gps
+# ./run gps.yml
+# ./run plays/gps.yml
+#
+# Additional parameters are passed to ansible-playbook:
+#
+# ./run gps --tags config
+
+
+target="site.yml"
+
+if [ $# -gt 0 ]; then
+    play=$1
+    shift
+
+    for possible in "${play}" "plays/${play}" "plays/${play}.yml"; do
+        if [ -f "${possible}" ]; then
+            target="${possible}"
+            break
+        fi
+    done
+fi
+
+ANSIBLE_CONFIG=config ansible-playbook -v ${target} $*

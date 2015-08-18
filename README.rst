@@ -92,3 +92,17 @@ or create a new one with ``ssh-keygen``.
   disable tty on UART::
 
         echo 'uart_tty_enable: false' > host_vars/myrpi.lan
+
+``run`` script also allows specifying partial playbook from
+`plays/` dir so you don't have to run every playbook over and over.
+All of the following variants are supported::
+
+        ./run gps
+        ./run gps.yml
+        ./run plays/gps.yml
+
+Passing additional arguments to ``run`` script is also supported
+and these are passed directly to ``ansible-playbook``::
+
+        ./run gps --tags config
+        ./run gps --limit gps1
