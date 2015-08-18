@@ -40,12 +40,6 @@
   shell: "UPDATE_SELF=0 SKIP_WARNING=1 rpi-update"
   when: kickstart_rpi_update
 
-- name: install packages
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-  - vim
-  - avahi-daemon
-
 - name: dist upgrade
   apt: upgrade=dist
   when: kickstart_dist_upgrade

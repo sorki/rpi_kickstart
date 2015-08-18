@@ -19,3 +19,4 @@ packages:
 - screen
 - strace
 - sshfs
+- vim
