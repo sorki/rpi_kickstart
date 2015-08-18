@@ -68,3 +68,9 @@
 - name: resize2fs
   shell: resize2fs /dev/mmcblk0p2
   when: kickstart_resize_rootfs
+
+- name: copy bashrc
+  copy:
+    src: files/bashrc
+    dest: /root/.bashrc
+    mode: 644
