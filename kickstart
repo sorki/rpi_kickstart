@@ -1,2 +1,13 @@
-#ANSIBLE_CONFIG=config ansible-playbook -v --sudo --ask-pass kickstart.yml $1
-ANSIBLE_CONFIG=kickstart_config ansible-playbook -v kickstart.yml $1
+#!/bin/bash
+
+target="raspberrypi.lan"
+
+if [ $# -gt 0 ]; then
+    target=$1
+    shift
+fi
+
+echo "Kickstarting ${target}"
+
+ANSIBLE_CONFIG=kickstart_config ansible-playbook -v kickstart.yml \
+  --extra-vars="target=${target}" $*

@@ -4,7 +4,7 @@
       prompt: "New hostname to set"
       private: no
 
-  hosts: all
+  hosts: "{{ target }}"
   roles:
     - kickstart
   sudo: yes
