@@ -22,11 +22,11 @@ target="site.yml"
 
 if [ $# -gt 0 ]; then
     play=$1
-    shift
 
     for possible in "${play}" "plays/${play}" "plays/${play}.yml"; do
         if [ -f "${possible}" ]; then
             target="${possible}"
+            shift
             break
         fi
     done
