@@ -18,3 +18,8 @@ kickstart_rpi_update_kernel: false
 
 # perform dist upgrade
 kickstart_dist_upgrade: false
+
+# add user for deployment purposes
+kickstart_add_deploy_user: true
+kickstart_deploy_user: deploy
+kickstart_deploy_group: deploy

@@ -77,3 +77,6 @@
     src: files/bashrc
     dest: /root/.bashrc
     mode: 644
+
+- include: deploy_user.yml
+  when: kickstart_add_deploy_user

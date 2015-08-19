@@ -1,0 +1,34 @@
+---
+
+- name: create deploy group
+  group:
+    name={{ kickstart_deploy_group }}
+    state=present
+
+- name: create deploy user
+  user:
+    name={{ kickstart_deploy_user }}
+    state=present
+    groups={{ kickstart_deploy_group }}
+    shell=/bin/bash
+
+- name: Ensure sudoers.d is enabled
+  lineinfile:
+    dest=/etc/sudoers
+    state=present
+    backup=yes
+    regexp='^#includedir /etc/sudoers.d'
+    line='#includedir /etc/sudoers.d'
+
+- name: Set up password-less sudo for deploy user
+  copy:
+    content="%{{ kickstart_deploy_user }} ALL=(ALL) NOPASSWD:ALL"
+    dest="/etc/sudoers.d/{{ kickstart_deploy_user }}"
+    owner=root
+    group=root
+    mode=0440
+
+- name: set authorized keys (devel environment)
+  authorized_key:
+    user={{ kickstart_deploy_user }}
+    key="{{ lookup('file', 'files/dev_key.pub') }}"
