@@ -34,9 +34,13 @@
   shell: apt-get -y autoremove
   when: kickstart_autoremove
 
-- name: update fw via rpi-update
+- name: update kernel via rpi-update
   shell: "UPDATE_SELF=0 SKIP_WARNING=1 rpi-update"
-  when: kickstart_rpi_update
+  when: kickstart_rpi_update_kernel
+
+- name: update fw via rpi-update
+  shell: "UPDATE_SELF=0 SKIP_WARNING=1 SKIP_KERNEL=1 rpi-update"
+  when: kickstart_rpi_update_firmware
 
 - name: dist upgrade
   apt: upgrade=dist

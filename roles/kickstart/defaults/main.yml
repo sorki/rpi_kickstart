@@ -11,7 +11,10 @@ kickstart_minimal: false
 kickstart_autoremove: false
 
 # update firmware via rpi-update
-kickstart_rpi_update: false
+kickstart_rpi_update_firmware: false
+
+# update kernel via rpi-update
+kickstart_rpi_update_kernel: false
 
 # perform dist upgrade
 kickstart_dist_upgrade: false
