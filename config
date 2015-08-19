@@ -1,9 +1,9 @@
 [defaults]
 private_key_file = ~/.ssh/id_rsa
+remote_user = deploy
 host_key_checking = False  #FIXME
 hostfile       = ./hosts
 library        = /usr/share/ansible
 roles_path = ./roles:./remote_roles
 nocows = 1
-remote_user = root
 ansible_managed = Ansible managed: {file} modified on %Y-%m-%d %H:%M:%S by {uid} on {host}
