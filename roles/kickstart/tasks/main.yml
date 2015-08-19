@@ -50,7 +50,6 @@
   hostname: name={{ new_hostname }}
 
 - name: reboot
-  #command: /sbin/shutdown -r now
   shell: sleep 2 && shutdown -r now "Ansible reboot triggered"
   async: 1
   poll: 0
