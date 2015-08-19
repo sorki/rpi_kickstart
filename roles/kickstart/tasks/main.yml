@@ -13,11 +13,9 @@
 
 - name: expand root filesystem
   shell: /tmp/expand_rootfs.sh
-  ignore_errors: true
+  register: res_result
+  failed_when: "'The partition table has been altered.' not in res_result.stdout"
   when: kickstart_resize_rootfs
-
-# FIXME (sorki): this fails with
-# stderr: Re-reading the partition table failed.: Device or resource busy
 
 - name: erase packages for minimal install
   apt: name={{ item }} state=absent purge=yes
