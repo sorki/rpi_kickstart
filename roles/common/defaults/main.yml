@@ -8,3 +8,6 @@ common_disable_8192cu_power_management: true
 
 # don't install man pages and documentation
 common_nodoc: true
+
+# remove pi user
+common_remove_pi_user: false

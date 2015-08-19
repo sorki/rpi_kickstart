@@ -53,3 +53,7 @@
 #    dest=/etc/sysconfig/ip6tables
 #  notify:
 #  - restart ip6tables
+#
+- name: remove pi user
+  user: name=pi state=absent remove=yes force=yes
+  when: common_remove_pi_user
