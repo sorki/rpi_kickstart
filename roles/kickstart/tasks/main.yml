@@ -68,6 +68,8 @@
 
 - name: resize2fs
   shell: resize2fs /dev/mmcblk0p2
+  register: r2fs_result
+  changed_when: "'Nothing to do!' not in r2fs_result.stderr"
   when: kickstart_resize_rootfs
 
 - name: copy bashrc
