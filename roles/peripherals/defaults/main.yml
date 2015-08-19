@@ -19,7 +19,8 @@ pps_input_enable: false # enable pulse per second input
 pps_gpio_pin: 18 # pps input pin
 
 # mmc, heartbeat
-led_trigger: mmc
+#led_trigger: mmc
+led_trigger:
 
 i2c_rtc: ds1307
 
