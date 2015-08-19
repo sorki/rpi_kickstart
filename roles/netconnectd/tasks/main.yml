@@ -19,7 +19,6 @@
   shell: 'cd {{ netconnectd_git_target }};{{ item }}'
   with_items:
     - python setup.py install
-  when: not {{ chronyd_stat.stat.exists }} or {{ chrony_git_rebuild }}
   tags: build
 
 - name: provide netconnectd config
