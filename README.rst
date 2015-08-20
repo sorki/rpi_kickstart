@@ -62,6 +62,13 @@ Usage
 
         ansible-galaxy install --role-file=requirements --roles-path=remote_roles
 
+`rpi_kickstart` expects public ssh key in ``files/dev_key.pub``
+- you can either use your existing key from ``~/.ssh`` directory::
+
+        ln -s ~/.ssh/id_rsa.pub files/dev_key.pub
+
+- or create a new one with ``ssh-keygen``.
+
 - if your RPi is accessible under ``raspberrypi.lan``
   hostname you can now run::
 
@@ -76,10 +83,6 @@ Configuring your RaspberryPi
 
 After kickstart finishes you can proceed with
 configuration of various peripherals and roles.
-
-Common roles expects public ssh key in ``files/dev_key.pub``
-- you can either use your existing key from ``~/.ssh`` directory
-or create a new one with ``ssh-keygen``.
 
 - after kickstart finishes add your RPi's hostname to
   ``hosts`` and ``site.yml`` files and provision using::
