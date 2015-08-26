@@ -57,3 +57,15 @@
 - name: remove pi user
   user: name=pi state=absent remove=yes force=yes
   when: common_remove_pi_user
+
+  # FIXME: experimental
+- name: remove /etc/locale.gen
+  file: path=/etc/locale.gen state=absent
+  when: common_update_locale
+
+- name: update locale
+  shell: '{{ item }}'
+  with_items:
+    - 'locale-gen {{ common_locale }}'
+    - 'update-locale {{ common_locale }}'
+  when: common_update_locale

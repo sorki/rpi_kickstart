@@ -1,5 +1,9 @@
 ---
 
+# experimental
+common_locale: "en_US.UTF-8"
+common_update_locale: false
+
 # set to true when in pruduction environment
 common_production_env: false
 
