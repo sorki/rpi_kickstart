@@ -37,6 +37,10 @@
     mode: 644
   when: common_nodoc
 
+- name: configure /etc/hosts
+  template: src=etc-hosts.j2
+    dest=/etc/hosts
+
 #- name: set root alias
 #  lineinfile: "dest=/etc/aliases line='root: {{ rootmail }}' regexp='^root:' state=present"
 #  notify:
