@@ -1,0 +1,4 @@
+---
+
+- name: enable avahi-daemon
+  service: name=avahi-daemon state=started enabled=yes

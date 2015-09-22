@@ -1,0 +1,9 @@
+avahi_debian_packages:
+  - avahi-daemon
+  - avahi-discover
+  - libnss-mdns
+
+avahi_redhat_packages:
+  - avahi
+  - avahi-tools
+  - nss-mdns
