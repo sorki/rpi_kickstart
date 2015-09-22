@@ -1,0 +1,20 @@
+- name: erase packages for minimal install
+  apt: name={{ item }} state=absent purge=yes
+  with_items:
+  - desktop-base
+  - lightdm
+  - lx*
+  - gnome*
+  - x11*
+  - xserver*
+  - raspberrypi-artwork
+  - wolfram-engine
+  when: kickstart_minimal
+
+- name: erase no longer required packages
+  shell: apt-get -y autoremove
+  when: kickstart_autoremove
+
+- name: dist upgrade
+  apt: upgrade=dist
+  when: kickstart_dist_upgrade

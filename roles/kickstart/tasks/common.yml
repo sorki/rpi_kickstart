@@ -1,0 +1,61 @@
+- name: copy /etc/modules
+  copy:
+    src: files/modules
+    dest: /etc/modules
+    mode: 644
+
+- name: copy expand_rootfs.sh
+  copy:
+    src: files/expand_rootfs.sh
+    dest: /tmp/expand_rootfs.sh
+    mode: 700
+  when: kickstart_resize_rootfs
+
+- name: expand root filesystem
+  shell: /tmp/expand_rootfs.sh
+  register: res_result
+  failed_when: "'The partition table has been altered.' not in res_result.stdout"
+  when: kickstart_resize_rootfs
+
+- name: update kernel via rpi-update
+  shell: "UPDATE_SELF=0 SKIP_WARNING=1 rpi-update"
+  when: kickstart_rpi_update_kernel
+
+- name: update fw via rpi-update
+  shell: "UPDATE_SELF=0 SKIP_WARNING=1 SKIP_KERNEL=1 rpi-update"
+  when: kickstart_rpi_update_firmware
+
+- name: set hostname
+  hostname: name={{ new_hostname }}
+
+- name: reboot
+  shell: sleep 2 && shutdown -r now "Ansible reboot triggered"
+  async: 1
+  poll: 0
+  ignore_errors: true
+
+- name: waiting for server to come back
+  local_action:
+    wait_for
+      host={{ new_hostname }}
+      port=22
+      state=started
+      delay=15
+      timeout=300
+      connect_timeout=15
+  sudo: false
+
+- name: resize2fs
+  shell: resize2fs /dev/mmcblk0p2
+  register: r2fs_result
+  changed_when: "'Nothing to do!' not in r2fs_result.stderr"
+  when: kickstart_resize_rootfs
+
+- name: copy bashrc
+  copy:
+    src: files/bashrc
+    dest: /root/.bashrc
+    mode: 644
+
+- include: deploy_user.yml
+  when: kickstart_add_deploy_user
