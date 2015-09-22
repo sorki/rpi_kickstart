@@ -22,4 +22,9 @@ X11Forwarding no
 PrintMotd no
 
 AcceptEnv XMODIFIERS
+{% if ansible_os_family == "Debian" %}
 Subsystem sftp /usr/lib/openssh/sftp-server
+{% endif %}
+{% if ansible_os_family == "RedHat" %}
+Subsystem sftp /usr/libexec/openssh/sftp-server
+{% endif %}
