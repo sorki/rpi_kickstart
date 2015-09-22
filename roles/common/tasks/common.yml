@@ -1,5 +1,4 @@
-- name: set correct hostname
-  hostname: name={{ hostname }}
+---
 
 - name: sshd configuration file update
   template: src=etc-ssh-sshd_config.j2
