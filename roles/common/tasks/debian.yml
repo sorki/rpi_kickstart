@@ -1,0 +1,31 @@
+---
+
+- name: install packages
+  apt: name={{ item }} state=present
+  with_items:
+    - "{{ common_debian_packages }}"
+
+- name: install extra packages
+  apt: name={{ item }} state=present
+  with_items:
+    - "{{ common_extra_debian_packages }}"
+  when: common_extra_debian_packages
+
+  # FIXME: experimental
+- name: remove /etc/locale.gen
+  file: path=/etc/locale.gen state=absent
+  when: common_update_locale
+
+- name: update locale
+  shell: '{{ item }}'
+  with_items:
+    - 'locale-gen {{ common_locale }}'
+    - 'update-locale {{ common_locale }}'
+  when: common_update_locale
+
+- name: put 01_nodoc to /etc/dpkg/dpkg.cfg.d/01_nodoc
+  copy:
+    src: 01_nodoc
+    dest: /etc/dpkg/dpkg.cfg.d/01_nodoc
+    mode: 644
+  when: common_nodoc

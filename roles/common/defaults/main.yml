@@ -1,5 +1,29 @@
 ---
 
+common_debian_packages:
+- bc
+- bash-completion
+- powertop
+- psmisc
+- screen
+- strace
+- sshfs
+- vim
+
+common_extra_debian_packages:
+
+common_redhat_packages:
+- bc
+- bash-completion
+- powertop
+- psmisc
+- screen
+- strace
+- sshfs
+- vim
+
+common_extra_redhat_packages:
+
 # experimental
 common_locale: "en_US.UTF-8"
 common_update_locale: false

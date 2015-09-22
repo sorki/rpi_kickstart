@@ -1,0 +1,12 @@
+---
+
+- name: install packages
+  dnf: name={{ item }} state=present
+  with_items:
+    - "{{ common_redhat_packages }}"
+
+- name: install extra packages
+  dnf: name={{ item }} state=present
+  with_items:
+    - "{{ common_extra_redhat_packages }}"
+  when: common_extra_redhat_packages
