@@ -3,6 +3,11 @@ if [[ $- != *i* ]] ; then
   return
 fi
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
 # load system specific
 if [ -f ~/.bash_local ]; then
   . ~/.bash_local
