@@ -1,6 +1,9 @@
-- name: install packages
-  apt: name={{ item }} state=present
-  with_items:
-    - build-essential
-    - scons
-    - cmake
+---
+
+#- include: common.yml
+
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: redhat.yml
+  when: ansible_os_family == 'RedHat'
