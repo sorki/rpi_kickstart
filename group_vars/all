@@ -10,13 +10,3 @@ smtp_server: localhost
 smtp_port: 25
 smtp_username:
 smtp_password:
-
-packages:
-- bc
-- bash-completion
-- powertop
-- psmisc
-- screen
-- strace
-- sshfs
-- vim
