@@ -1,31 +1,9 @@
-- name: install packages
-  apt: name={{ item }} state=present
-  with_items:
-    - gpsd
-    - gpsd-clients
-    - python-gps
-    - pps-tools
-  tags: packages
+---
 
-- name: provide gpsd config
-  template: src=gpsd.j2
-    dest=/etc/default/gpsd
-  notify: restart gpsd
-  tags: config
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
 
-  # FIXME (sorki) ^^ should go to /etc/sysconfig on EL
+- include: redhat.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: provide gpsd.socket
-  template: src=etc-systemd-system-gpsd.socket
-    dest=/etc/systemd/system/gpsd.socket
-  tags: service
-
-- name: provide gpsd.service
-  template: src=etc-systemd-system-gpsd.service
-    dest=/etc/systemd/system/gpsd.service
-  notify: systemd
-  tags: service
-
-- name: enable gpsd
-  service: name=gpsd state=started enabled=yes
-  tags: service
+- include: common.yml

@@ -1,0 +1,16 @@
+---
+
+- name: provide gpsd.socket
+  template: src=etc-systemd-system-gpsd.socket
+    dest=/etc/systemd/system/gpsd.socket
+  tags: service
+
+- name: provide gpsd.service
+  template: src=etc-systemd-system-gpsd.service
+    dest=/etc/systemd/system/gpsd.service
+  notify: systemd
+  tags: service
+
+- name: enable gpsd
+  service: name=gpsd state=started enabled=yes
+  tags: service

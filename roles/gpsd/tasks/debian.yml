@@ -1,0 +1,16 @@
+---
+
+- name: install packages
+  apt: name={{ item }} state=present
+  with_items:
+    - gpsd
+    - gpsd-clients
+    - python-gps
+    - pps-tools
+  tags: packages
+
+- name: provide gpsd config
+  template: src=gpsd.j2
+    dest=/etc/default/gpsd
+  notify: restart gpsd
+  tags: config

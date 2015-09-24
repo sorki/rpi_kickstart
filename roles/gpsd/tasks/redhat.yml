@@ -1,0 +1,16 @@
+---
+
+- name: install packages
+  dnf: name={{ item }} state=present
+  with_items:
+    - gpsd
+    - gpsd-libs
+    - gpsd-clients
+    - pps-tools
+  tags: packages
+
+- name: provide gpsd config
+  template: src=gpsd.j2
+    dest=/etc/sysconfig/gpsd
+  notify: restart gpsd
+  tags: config
