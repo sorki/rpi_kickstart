@@ -6,3 +6,4 @@
 - include: plays/hostapd.yml
 - include: plays/netconnectd.yml
 - include: plays/ntpserver.yml
+- include: plays/ros.yml

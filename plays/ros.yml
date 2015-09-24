@@ -1,0 +1,5 @@
+- name: ros
+  hosts: ros
+  roles:
+    - ros
+  sudo: yes

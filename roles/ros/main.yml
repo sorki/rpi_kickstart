@@ -1,0 +1,5 @@
+ros_tools_packages:
+  - python-rosdep
+  - python-rosinstall_generator
+  - python-wstool
+  - python-rosinstall

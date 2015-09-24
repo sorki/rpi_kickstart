@@ -1,0 +1,7 @@
+---
+
+- name: install ROS installation tools
+  apt: name={{ item }} state=present
+  with_items:
+    - "{{ ros_tools_packages }}"
+    - build-essential
