@@ -8,7 +8,7 @@ Requirements
 ------------
 
 - Raspberry Pi
-- up to date Debain image with systemd
+- Fedora or Debain image with systemd
 - ansible >= 1.9
 
 Getting your RPi online
