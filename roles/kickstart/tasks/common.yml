@@ -25,8 +25,10 @@
   shell: "UPDATE_SELF=0 SKIP_WARNING=1 SKIP_KERNEL=1 rpi-update"
   when: kickstart_rpi_update_firmware
 
+  # FIXME: fails on some distributions but hostnamectl succeeds
 - name: set hostname
   hostname: name={{ new_hostname }}
+  ignore_errors: true
 
 - name: reboot
   shell: sleep 2 && shutdown -r now "Ansible reboot triggered"
@@ -37,7 +39,7 @@
 - name: waiting for server to come back
   local_action:
     wait_for
-      host={{ new_hostname }}
+      host={{ ansible_default_ipv4.address }}
       port=22
       state=started
       delay=15
