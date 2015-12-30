@@ -23,3 +23,6 @@ kickstart_dist_upgrade: false
 kickstart_add_deploy_user: true
 kickstart_deploy_user: deploy
 kickstart_deploy_group: deploy
+
+# disable 8192cu wifi power management
+kickstart_disable_8192cu_power_management: false

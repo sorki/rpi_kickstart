@@ -1,0 +1,6 @@
+- name: copy /etc/modprobe.d/8192cu.conf
+  copy:
+    src: etc-modprobe.d-8192cu.conf
+    dest: /etc/modprobe.d/8192cu.conf
+    mode: 644
+  when: kickstart_disable_8192cu_power_management
