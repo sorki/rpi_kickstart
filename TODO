@@ -7,11 +7,13 @@ vpn
 - snow
 - i2p http://paste.roguecoders.com/p/ccc866b18df1f6c67f3fc60bf4428b05.txt
 - ^^ (native i2p)
+- ser2net
 
 packages
 ~~~~~~~~
 
 RoS
+http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi
 pip install RPi.GPIO
 wiringPi
 wiringPi-python
@@ -35,6 +37,8 @@ http://www.uco.es/investiga/grupos/ava/node/40
 
 improvements
 ~~~~~~~~~~~~
+
+rename devel -> dev
 
 raspi-config / overclocking / memshare / overscan
 
@@ -63,3 +67,42 @@ grep vars from yml/j2 file, generate template
 for defaults/main.yml
 
 check if vars are defined
+
+---
+fedora sometimes missing:
+
+yum
+yum-utils
+
+disabled selinux on rpi
+
+
+Kiosk
+~~~~~
+
+http://blog.qruizelabs.com/2014/04/29/raspberrypi-kiosk-matchbox-uzbl/
+
+nodm
+xinit
+
+uzbl
+
+x11vnc
+
+unclutter
+
+matchbox-window-manager
+matchbox-keyboard
+
+Volumio
+~~~~~~~
+
+port to fedora..
+
+Enabling X11 on volumio:
+
+apt-get update
+apt-get upgrade
+apt-get install xserver-xorg xserver-xorg-core xfonts-base xinit xserver-xorg-input-evdev
+apt-get install matchbox
+apt-get install midori
