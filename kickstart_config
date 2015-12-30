@@ -11,4 +11,3 @@ ansible_managed = Ansible managed: {file} modified on %Y-%m-%d %H:%M:%S by {uid}
 
 [ssh_connection]
 ssh_args=-o ControlMaster=auto -o ControlPersist=60s -o ControlPath=/tmp/ansible-ssh-%h-%p-%r -o UserKnownHostsFile=/dev/null
-
