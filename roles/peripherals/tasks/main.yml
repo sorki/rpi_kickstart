@@ -1,7 +1,8 @@
 - name: set /boot/cmdline.txt
   template: src=boot-cmdline.txt.j2
-    dest=/boot/cmdline.txt
+    dest="{{ chroot }}/boot/cmdline.txt"
 
 - name: set /boot/config.txt
   template: src=boot-config.txt.j2
-    dest=/boot/config.txt
+    dest="{{ chroot }}/boot/config.txt"
+  when: rpi_legacy_config_txt

@@ -1,5 +1,8 @@
 ---
 
+# uses /boot/config.txt for configuration
+rpi_legacy_config_txt: false
+
 i2c_enable: true
 uart_baud: 115200
 uart_tty_enable: true # enable console on serial tty

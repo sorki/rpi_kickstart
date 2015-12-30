@@ -10,3 +10,11 @@ smtp_server: localhost
 smtp_port: 25
 smtp_username:
 smtp_password:
+
+# if your rPi image is mounted on local filesystem
+# you can set chroot to operate on image
+# instead of remote system
+# default: empty, no chroot prefix used
+# param: path, operate on chroot prefix {{ chroot }}
+chroot:
+#chroot: /mnt
