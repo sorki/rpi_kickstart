@@ -30,6 +30,15 @@
   hostname: name={{ new_hostname }}
   ignore_errors: true
 
+- name: copy bashrc
+  copy:
+    src: files/bashrc
+    dest: /root/.bashrc
+    mode: 644
+
+- include: deploy_user.yml
+  when: kickstart_add_deploy_user
+
 - name: reboot
   shell: sleep 2 && shutdown -r now "Ansible reboot triggered"
   async: 1
@@ -52,12 +61,3 @@
   register: r2fs_result
   changed_when: "'Nothing to do!' not in r2fs_result.stderr"
   when: kickstart_resize_rootfs
-
-- name: copy bashrc
-  copy:
-    src: files/bashrc
-    dest: /root/.bashrc
-    mode: 644
-
-- include: deploy_user.yml
-  when: kickstart_add_deploy_user
