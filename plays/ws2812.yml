@@ -1,0 +1,5 @@
+- name: ws2812
+  hosts: ws2812
+  roles:
+    - ws2812
+  sudo: yes

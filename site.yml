@@ -7,3 +7,4 @@
 - include: plays/netconnectd.yml
 - include: plays/ntpserver.yml
 - include: plays/ros.yml
+- include: plays/ws2812.yml

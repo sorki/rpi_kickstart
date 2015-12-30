@@ -1,0 +1,19 @@
+- set_fact:
+    ws2812b_git_target: /root/rpi_ws281x
+
+- name: install packages
+  yum: name={{ item }} state=present
+  with_items:
+    - git
+    - scons
+
+- name: clone ws2812b git
+  git:
+    repo=https://github.com/jgarff/rpi_ws281x
+    dest={{ ws2812b_git_target }}
+    update=true
+
+- name: build
+  shell: 'cd {{ ws2812b_git_target }};{{ item }}'
+  with_items:
+    - scons
