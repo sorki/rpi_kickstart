@@ -14,7 +14,7 @@
 - name: expand root filesystem
   shell: /tmp/expand_rootfs.sh
   register: res_result
-  failed_when: "'The partition table has been altered.' not in res_result.stdout"
+  failed_when: "'The partition table has been altered' not in res_result.stdout"
   when: kickstart_resize_rootfs
 
 - name: update kernel via rpi-update
